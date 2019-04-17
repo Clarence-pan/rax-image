@@ -1,4 +1,4 @@
-import { createElement, useState, useRef} from 'rax';
+import { createElement, useState, useRef } from 'rax';
 import { isWeex } from 'universal-env';
 import View from 'rax-view';
 import './index.css';
@@ -72,12 +72,7 @@ const Image = (props) => {
 
     delete nativeProps.source;
 
-    let NativeImage;
-    if (isWeex) {
-      NativeImage = 'image';
-    } else {
-      NativeImage = 'img';
-    }
+    let NativeImage = isWeex ? 'image' : 'img';
 
     // for cover and contain
     let resizeMode = nativeProps.resizeMode || nativeProps.style.resizeMode;
