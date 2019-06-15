@@ -1,10 +1,9 @@
-import { createElement, useState, useRef } from 'rax';
-import { isWeex } from 'universal-env';
-import View from 'rax-view';
-import './index.css';
+import { createElement, useState, useRef} from 'rax';
+import { Props } from '../types';
 
-const Image = (props) => {
-  let [source, setSource] = useState('');
+const Image = (props:Props) => {
+
+  let [ source, setSource ] = useState(props.source);
   const [isError, setIsError] = useState(false);
   const imgRef = useRef(null);
 
@@ -22,7 +21,7 @@ const Image = (props) => {
   };
 
   const onError = e => {
-    const { fallbackSource = {}, onError = () => {} } = props;
+    const { fallbackSource, onError = () => {} } = props;
 
     if (fallbackSource.uri && source.uri !== fallbackSource.uri) {
       setSource(fallbackSource);
@@ -31,13 +30,7 @@ const Image = (props) => {
     onError(e);
   };
 
-  const save = (callback) => {
-    imgRef.current.save(result => {
-      callback(result);
-    });
-  };
-
-  let nativeProps = {
+  let nativeProps:any = {
     ...props,
   };
   source = isError ? source : nativeProps.source;
@@ -45,7 +38,7 @@ const Image = (props) => {
   // Source must a object
   if (source && source.uri) {
     let style = nativeProps.style;
-    let {width, height, uri} = source;
+    let { width, height, uri} = source;
 
     // Default is 0
     if (
@@ -60,7 +53,7 @@ const Image = (props) => {
 
     nativeProps.style = {
       ...{
-        ...{display: 'flex'},
+        ...{ display: 'flex' },
         width: width,
         height: height,
       },
@@ -72,42 +65,27 @@ const Image = (props) => {
 
     delete nativeProps.source;
 
-    let NativeImage = isWeex ? 'image' : 'img';
-
     // for cover and contain
     let resizeMode = nativeProps.resizeMode || nativeProps.style.resizeMode;
     if (resizeMode) {
-      if (isWeex) {
-        nativeProps.resize = resizeMode;
-        nativeProps.style.resizeMode = resizeMode;
-      } else {
         nativeProps.style.objectFit = resizeMode;
-      }
     }
 
     if (props.children) {
       nativeProps.children = null;
       return (
-        <View style={nativeProps.style}>
-          <NativeImage ref={imgRef} {...nativeProps} />
-          <View className="absoluteImage">
+        <div style={nativeProps.style}>
+          <img ref={ imgRef } {...nativeProps} />
+          <div className="absoluteImage">
             {props.children}
-          </View>
-        </View>
+          </div>
+        </div>
       );
     } else {
-      return <NativeImage ref={imgRef} {...nativeProps} />;
+      return <img ref={ imgRef } {...nativeProps} />;
     }
   }
   return null;
-};
-
-Image.resizeMode = {
-  contain: 'contain',
-  cover: 'cover',
-  stretch: 'stretch',
-  center: 'center',
-  repeat: 'repeat',
 };
 
 export default Image;

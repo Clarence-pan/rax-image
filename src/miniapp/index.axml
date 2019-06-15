@@ -1,0 +1,5 @@
+<image style="{{style}}" 
+    class="{{className}}"
+    src="{{source.uri}}"
+    onTap="onClick"
+    mode="aspectFit" />
