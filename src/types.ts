@@ -48,7 +48,6 @@ export interface Props extends Rax.Attributes {
   onError?: (e: Event)=> void;
 }
 
-// FIXME: 这个 Event 的定义还不足
 interface Event {
   [propName:string]: any;
 }
