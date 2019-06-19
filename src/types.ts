@@ -51,13 +51,3 @@ export interface Props extends Rax.Attributes {
 interface Event {
   [propName: string]: any;
 }
-
-/**
- * ref 实例方法
- */
-export interface RefInstanceMethods {
-  /**
-   * 保存图片事件回调
-   */
-  save?: () => void;
-}

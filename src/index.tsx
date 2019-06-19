@@ -33,12 +33,6 @@ const Image = (props: Props, ref) => {
   };
 
   useImperativeHandle(ref, () => ({
-    // save 方法只在 weex 下可用
-    save: isWeex ? (callback) => {
-      imgRef.current.save(result => {
-        callback(result);
-      });
-    } : () => {},
     _nativeNode: imgRef.current
   }));
 
