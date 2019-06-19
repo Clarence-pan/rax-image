@@ -1,13 +1,23 @@
-import { createElement, useState, useRef, forwardRef, useImperativeHandle } from 'rax';
+import { createElement, useState, forwardRef, useRef, useImperativeHandle } from 'rax';
 import { isWeex } from 'universal-env';
 import View from 'rax-view';
 import { Props } from './types';
-import './index.css';
 
 const Image = (props: Props, ref) => {
   let [source, setSource] = useState('');
   const [isError, setIsError] = useState(false);
+
   const imgRef = useRef(null);
+
+  const onError = e => {
+    const { fallbackSource = {}, onError = () => {} } = props;
+
+    if (fallbackSource.uri && source.uri !== fallbackSource.uri) {
+      setSource(fallbackSource);
+      setIsError(true);
+    }
+    onError(e);
+  };
 
   const onLoad = e => {
     const { onLoad = () => {} } = props;
@@ -22,27 +32,17 @@ const Image = (props: Props, ref) => {
     }
   };
 
-  const onError = e => {
-    const { fallbackSource = {}, onError = () => {} } = props;
-
-    if (fallbackSource.uri && source.uri !== fallbackSource.uri) {
-      setSource(fallbackSource);
-      setIsError(true);
-    }
-    onError(e);
-  };
-
-  // imgRef 在 Weex 环境下有
   useImperativeHandle(ref, () => ({
-    save: (callback) => {
+    // save 方法只在 weex 下可用
+    save: isWeex ? (callback) => {
       imgRef.current.save(result => {
         callback(result);
       });
-    },
+    } : () => {},
     _nativeNode: imgRef.current
   }));
 
-  let nativeProps:any = {
+  let nativeProps: any = {
     ...props,
   };
   source = isError ? source : nativeProps.source;

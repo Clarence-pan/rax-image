@@ -13,12 +13,12 @@ export interface Props extends Rax.Attributes {
     uri?: string;
     width?: string|number;
     height?: string|number;
-  },
+  };
   /**
    * 图片样式
    * 支持端: Weex/Web
    */
-  style?: Rax.CSSProperties,
+  style?: Rax.CSSProperties;
   /**
    * 降级图片的源
    * 支持端: Weex
@@ -27,7 +27,7 @@ export interface Props extends Rax.Attributes {
     uri?: string;
     width?: string;
     height?: string;
-  },
+  };
   /**
    * 图片展示模式
    * 支持端: Weex/Web
@@ -41,15 +41,15 @@ export interface Props extends Rax.Attributes {
   /**
    * 图片加载成功事件回调
    */
-  onLoad?: (e: Event)=> void;
+  onLoad?: (e: Event) => void;
   /**
    * 图片加载失败事件回调
    */
-  onError?: (e: Event)=> void;
+  onError?: (e: Event) => void;
 }
 
 interface Event {
-  [propName:string]: any;
+  [propName: string]: any;
 }
 
 /**
@@ -59,5 +59,5 @@ export interface RefInstanceMethods {
   /**
    * 保存图片事件回调
    */
-  save?: ()=> void;
+  save?: () => void;
 }

@@ -10,7 +10,7 @@
     "build": "npm run clean && rax-scripts build --type 'component'",
     "start": "rax-scripts start --type 'component' -p 8000",
     "prepublishOnly": "npm run build",
-    "test": "rax-scripts test",
+    "test": "npm run build && rax-scripts test",
     "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./src"
   },
   "files": [
@@ -47,7 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "csstype": "^2.6.4",
-    "driver-dom": "^1.0.0",
+    "driver-universal": "^1.0.0-beta.4",
     "eslint": "^5.16.0",
     "eslint-config-rax": "^0.0.0",
     "rax": "^1.0.0",

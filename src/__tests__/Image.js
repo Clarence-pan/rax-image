@@ -1,6 +1,6 @@
 import {createElement, Component} from 'rax';
 import renderer from 'rax-test-renderer';
-import Image from '../';
+import Image from '../../lib/';
 
 describe('Image', () => {
   it('should render null when no source or source.uri', () => {

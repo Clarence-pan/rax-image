@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 import fmtEvent from './fmtEvent';
 
 Component({
   data: {},
   props: {
-    className: "",
-    style: "",
+    className: '',
+    style: '',
     source: {
-      uri: ""
+      uri: ''
     },
     onClick: function onClick() {}
   },
