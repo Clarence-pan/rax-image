@@ -8,7 +8,8 @@
     "start": "rax-scripts start",
     "build": "rax-scripts build",
     "test": "jest",
-    "lint": "eslint --ext .js --ext .jsx ./src"
+    "lint": "eslint --ext .js --ext .jsx ./src",
+    "prepare": "npm run build"
   },
   "files": [
     "dist",
