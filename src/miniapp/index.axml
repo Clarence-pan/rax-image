@@ -2,4 +2,5 @@
     class="{{className}}"
     src="{{source.uri}}"
     onTap="onClick"
-    mode="aspectFit" />
+    mode="{{mode}}"
+    lazyLoad="{{lazyLoad}}" />
